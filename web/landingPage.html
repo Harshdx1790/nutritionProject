@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Nutrition Project</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--<link rel="stylesheet" type="text/css" href="resource/css/materialize.min.css">-->
+        <link rel="stylesheet" type="text/css" href="resource/materialise/materialize.min.css">
+        <!--<link rel="stylesheet" type="text/css" href="resource/css/angular-material.min.css">-->
+        <link rel="stylesheet" type="text/css" href="resource/css/fontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" type="text/css" href="resource/css/dataTable/datatables.min.css"/>
+        <link rel="stylesheet" type="text/css" href="resource/css/dataTable/jqueryui.min.css"/>
+        <link rel="stylesheet" type="text/css" href="resource/css/dataTable/jquery-ui.css"/>
+        <link rel="stylesheet" type="text/css" href="resource/css/custom.css"/>
+        <link rel="stylesheet" type="text/css" href="resource/css/color.css"/>
+        <!--<link rel="stylesheet" type="text/css" href="resource/materialise/pageCenter.css"/>-->
+        <link rel="stylesheet" type="text/css" href="resource/materialise/prism.css"/>
+        <link rel="stylesheet" type="text/css" href="resource/materialise/style.css"/>
+        <link rel="stylesheet" type="text/css" href="resource/materialise/Horizontal.css"/>
+        <link rel="stylesheet" type="text/css" href="resource/materialise/perfect-scrollbar.css"/>
+        <link rel="stylesheet" type="text/css" href="resource/materialise/chartist.min.css"/>
+        <link rel="stylesheet" type="text/css" href="resource/datePicker/default.css"/>
+        <link rel="stylesheet" type="text/css" href="resource/datePicker/default.date.css"/>
+    </head>
+    <body>
+        <!--start up loading--> 
+        
+        <div id="loader-wrapper">
+            <div id="loader"></div>        
+            <div class="loader-section section-left"></div>
+            <div class="loader-section section-right"></div>
+        </div>
+        
+        <!--end of loading--> 
+        <!--start header--> 
+        <header id="header" class="page-topbar">
+        <!-- start header nav-->
+        <div class="navbar-fixed">
+            <nav class="cyan">
+                <div class="nav-wrapper">                    
+                    
+                    <ul class="left">                      
+                      <li><h1 class="logo-wrapper"><a href="index.html" class="brand-logo darken-1">Neutrition Data</a> </h1></li>
+                      <!--<li><h1 class="logo-wrapper"><a href="index.html" class="brand-logo darken-1"><img src="images/materialize-logo.png" alt="materialize logo"></a> <span class="logo-text">Materialize</span></h1></li>-->
+                    </ul>
+<!--                    <div class="header-search-wrapper hide-on-med-and-down">
+                        <i class="mdi-action-search"></i>
+                        <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize"/>
+                    </div>-->
+                    <ul class="right hide-on-med-and-down">                        
+                        <li><a href="javascript:void(0);" class="waves-effect waves-block waves-light toggle-fullscreen"><i class="fa fa-arrows-alt" style="font-size: x-large" aria-hidden="true"></i></a>
+                        </li>
+                        <li><a href="javascript:void(0);" class="waves-effect waves-block waves-light" onclick="logout()"><i class="fa fa-power-off" style="font-size: x-large" aria-hidden="true"></i></a>
+                        </li>                        
+                        <li><a href="javascript:void(0);" class="waves-effect waves-block waves-light"><i class="fa fa-home " style="font-size: xx-large" aria-hidden="true"></i></a>
+                        </li>                        
+<!--                        <li><a href="#" data-activates="chat-out" class="waves-effect waves-block waves-light chat-collapse"><i class="mdi-communication-chat"></i></a>
+                        </li>-->
+                    </ul>
+                </div>
+            </nav>
+            
+        </div>
+        <!-- end header nav-->
+  </header>
+        
+        <!--end header-->
+        <div id="breadcrumbs-wrapper" class=" grey lighten-3">
+        <div class=" ">
+            <div class="row">
+              <div class="col s12 m12 l12" id="welcomeUser">
+                  <h5 class="breadcrumbs-title " style="padding-bottom: 1%">Welcome</h5>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--<a class="waves-effect waves-light btn" onclick="formData()">button</a>-->
+        <div class="container " id="formContent">
+            <div class="card-panel">
+            <div class="row">
+                <div class="input-field col s6">
+                    <select disabled id="selectDistrictBox">
+                        <option value="" disabled selected>Choose your option</option>
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                    </select>
+                    <label>Selected District</label>
+                </div>
+                <div class="input-field col s6">
+                    <select disabled id="selectBlock" onchange="getprojectData()">
+                        <option value="" disabled selected>Choose your option</option>
+                        
+                    </select>
+                    <label>Select Block</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <p>
+                        <input disabled type="checkbox" id="test6" onchange="disableProjectInfo()"  />
+                        <label for="test6">(Please tick the box if project name is same as block name) </label>
+                    </p>
+                </div>
+                <div class="input-field col s6" id="project_name_Div" >
+                    <i class="material-icons prefix" >work</i>
+                    <input disabled type="text" id="project_name" >
+                    <label for="project_name">Project Name</label>
+                </div>
+                
+            </div>
+            
+            <div class="row">
+                <div class="input-field col s6">
+                    <select class="projectName" disabled id="selectProject" onchange="getPHCData()">
+                      <option value="" disabled selected>Choose your option</option>  
+                        
+                    </select>
+                    <label>Select Project Type </label>
+                </div>
+                <div class="input-field col s6">
+                    <select disabled id="selectProjectType" >
+                        <option value="" disabled selected>Choose your option</option>
+                        <option value="Rural">Rural</option>
+                        <option value="Urban">Urban</option>
+                        
+                    </select>
+                    <label>Rural/Urban</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <select disabled id="selectPHCName" onchange="getSubCentreData()">
+                        <option value="" disabled selected>Choose your option</option>
+<!--                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>-->
+                    </select>
+                    <label>Select CHC/PHC Name </label>
+                </div>
+                <div class="input-field col s6">
+                    <select disabled id="selectSubcenter" onchange="getVillageData()">
+                        <option value="" disabled selected>Choose your option</option>
+<!--                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>-->
+                    </select>
+                    <label>Select Subcenter </label>
+                </div>
+                
+            </div>
+            </div>
+            <div class="card-panel">
+            <div class="row">
+                 <div class="input-field col s6">
+                    <i class="material-icons prefix" >account_circle</i>
+                    <input placeholder="Max 50 Character" id="Medical-characters-demo" type="text" class="">
+                    <label for="characters">Officer /Medical Officer Name</label>
+                </div>
+                <div class="input-field col s6">
+                     <i class="material-icons prefix" >phone</i>
+                     <input id="phone-Medical" type="text" class="">
+                     <label for="phone_Medical">Officer /Medical Officer Mobile</label>
+                </div>
+            </div>
+            <div class="row">
+                 <div class="input-field col s6">
+                    <i class="material-icons prefix" >account_circle</i>
+                    <input placeholder="Max 50 Character" id="Child-characters-demo" type="text" class="">
+                    <label for="characters">Officer /Child Development Project Officer Name</label>
+                </div>
+                <div class="input-field col s6">
+                    <i class="material-icons prefix" >phone</i>
+                     <input id="phone-Child" type="text" class="">
+                     <label for="phone_Child">Officer /Child Development Project Officer Mobile</label>
+                </div>
+            </div>
+            <div class="row">
+                 <div class="input-field col s6">
+                    <i class="material-icons prefix" >account_circle</i>
+                    <input placeholder="Max 50 Character" id="characters-demo" type="text" class="">
+                    <label for="characters">ANM Name</label>
+                </div>
+                <div class="input-field col s6">
+                    <i class="material-icons prefix " >phone</i>
+                     <input id="phone-ANM" type="text" class="">
+                     <label for="phone_ANM">ANM Mobile</label>
+                </div>
+            </div>
+            </div>
+            <div class="card-panel">
+            <div class="row">
+                <div class="input-field col s6">
+                    <select disabled id="selectVillage">
+                        <option value="" disabled selected>Choose your option</option>
+
+                    </select>
+                    <label>Select Village </label>
+                </div>
+                <div class="input-field col s6">
+                    <i class="material-icons prefix" >account_circle</i>
+                    <input placeholder="Max 50 Character" id="villageAssemblyName" type="text" class="">
+                    <label for="villageAssemblyName">Village Assembly Name</label>
+                </div>
+            </div>
+            <div class="row">
+                 <div class="input-field col s6">
+                    <i class="material-icons prefix" >account_circle</i>
+                    <input placeholder="Max 50 Character" id="villageHeadName" type="text" class="">
+                    <label for="villageHeadName">Village Head Name</label>
+                </div>
+                <div class="input-field col s6">
+                     <i class="material-icons prefix" >phone</i>
+                     <input id="village_Head_Mobile" type="text" class="">
+                     <label for="village_Head_Mobile">Village Head Mobile</label>
+                </div>
+            </div>
+            <div class="row">
+                 <div class="input-field col s6">
+                    <i class="material-icons prefix" >account_circle</i>
+                    <input placeholder="Max 50 Character" id="awwName" type="text" class="">
+                    <label for="awwName">Anganwadi Worker Name</label>
+                </div>
+                <div class="input-field col s6">
+                    <i class="material-icons prefix" >phone</i>
+                     <input id="awwMobile" type="text" class="">
+                     <label for="awwMobile">Anganwadi Worker Mobile</label>
+                </div>
+            </div>
+            <div class="row">
+                 <div class="input-field col s6">
+                    <i class="material-icons prefix" >account_circle</i>
+                    <input placeholder="Max 50 Character" id="ashaName" type="text" class="">
+                    <label for="ashaName">Asha Name</label>
+                </div>
+                <div class="input-field col s6">
+                    <i class="material-icons prefix " >phone</i>
+                     <input id="ashaMobile" type="text" class="">
+                     <label for="ashaMobile">Asha Mobile</label>
+                </div>
+            </div>
+            <div class="row">
+                 <div class="input-field col s6">
+                    <i class="material-icons prefix" >account_circle</i>
+                    <input placeholder="Max 50 Character" id="Servant_Name" type="text" class="">
+                    <label for="Servant_Name">Chief Servant Name</label>
+                </div>
+                <div class="input-field col s6">
+                    <i class="material-icons prefix " >phone</i>
+                     <input id="Servant_mobile" type="text" class="">
+                     <label for="Servant_mobile">Chief Servant Mobile</label>
+                </div>
+            </div>
+            <div class="row">
+                 <div class="input-field col s6">
+                     <i class="fa fa-calendar prefix" aria-hidden="true"></i>
+                    <label class="active" for="datePicker" id="datePickerLabel">V.H.N.D Day</label>
+                     <input type="date" id="datePicker" class="datepicker" >
+                </div>
+                <div class="input-field col s6">
+                    <i class="fa fa-map-marker prefix" aria-hidden="true"></i>
+                     <input id="Place" type="text" class="">
+                     <label for="Place">V.H.N.D Place</label>
+                </div>
+            </div>
+            </div>
+            <div class="row center" >
+                <button class="btn waves-effect waves-light karvySkyBlueBackGround center cyan" style="border-radius: 25px;"  onclick="insertData()" name="action" >Submit
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </div>
+        
+        <script>var myContextPath = "${pageContext.request.contextPath}"</script>
+        <script type="text/javascript" src="resource/JS/jquery.min.js"></script>
+        <script type="text/javascript" src="resource/JS/jquery-ui.js"></script>
+        <script type="text/javascript" src="resource/JS/materialize.min.js"></script>
+        <script type="text/javascript" src="resource/JS/datatables.min.js"></script>
+        <script type="text/javascript" src="resource/JS/custom.js"></script>
+        <script type="text/javascript" src="resource/materialise/scrollbar.js"></script>
+        <script type="text/javascript" src="resource/materialise/prism.js"></script>
+        <script type="text/javascript" src="resource/materialise/plugin.js"></script>
+        <script type="text/javascript" src="resource/materialise/formatter.js"></script>
+        <script type="text/javascript" src="resource/datePicker/picker.js"></script>
+        <script type="text/javascript" src="resource/datePicker/picker.date.js"></script>
+        <script type="text/javascript" src="resource/datePicker/legacy.js"></script>
+        
+        <script type="text/javascript">
+            $(document).ready(function() {
+                getWelcomeData();
+                $('select').material_select();
+            });
+            
+                $('.datepicker').pickadate({
+//                    selectMonths: true, // Creates a dropdown to control month
+//                    selectYears: 15 // Creates a dropdown of 15 years to control year
+                });
+        
+            $('#phone-Child').formatter({
+            'pattern': '+91 {{999}}-{{999}}-{{9999}}',
+            'persistent': true
+            });
+            $('#phone-Medical').formatter({
+            'pattern': '+91 {{999}}-{{999}}-{{9999}}',
+            'persistent': true
+            });
+            $('#phone-ANM').formatter({
+            'pattern': '+91 {{999}}-{{999}}-{{9999}}',
+            'persistent': true
+            });
+            $('#Servant_mobile').formatter({
+            'pattern': '+91 {{999}}-{{999}}-{{9999}}',
+            'persistent': true
+            });
+            $('#ashaMobile').formatter({
+            'pattern': '+91 {{999}}-{{999}}-{{9999}}',
+            'persistent': true
+            });
+            $('#awwMobile').formatter({
+            'pattern': '+91 {{999}}-{{999}}-{{9999}}',
+            'persistent': true
+            });
+            $('#village_Head_Mobile').formatter({
+            'pattern': '+91 {{999}}-{{999}}-{{9999}}',
+            'persistent': true
+            });
+//            $('#characters-demo').formatter({
+//          'pattern': '{{aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa}}',
+//            });
+//            $('#Child-characters-demo').formatter({
+//          'pattern': '{{aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa}}',
+//            });
+//            $('#Medical-characters-demo').formatter({
+//          'pattern': '{{aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa}}',
+//            });
+            
+        </script>    
+    </body>
+    
+</html>

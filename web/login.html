@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Nutrition Project</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="resource/css/materialize.min.css">
+        <!--<link rel="stylesheet" type="text/css" href="resource/css/angular-material.min.css">-->
+        <link rel="stylesheet" type="text/css" href="resource/css/fontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" type="text/css" href="resource/css/dataTable/datatables.min.css"/>
+        <link rel="stylesheet" type="text/css" href="resource/css/dataTable/jqueryui.min.css"/>
+        <link rel="stylesheet" type="text/css" href="resource/css/dataTable/jquery-ui.css"/>
+        <link rel="stylesheet" type="text/css" href="resource/css/custom.css"/>
+        <link rel="stylesheet" type="text/css" href="resource/css/color.css"/>
+        <link rel="stylesheet" type="text/css" href="resource/materialise/pageCenter.css"/>
+        <link rel="stylesheet" type="text/css" href="resource/materialise/prism.css"/>
+        <link rel="stylesheet" type="text/css" href="resource/materialise/style.min.css"/>
+    </head>
+    <body class="cyan ">
+        <div id="loader-wrapper">
+      <div id="loader"></div>        
+      <div class="loader-section section-left"></div>
+      <div class="loader-section section-right"></div>
+  </div>
+            
+
+  <div id="login-page" class="row">
+    <div class="col s12 z-depth-4 card-panel">
+      <form class="login-form">
+        <div class="row">
+          <div class="input-field col s12 center">
+            <img src="resource/images/mt.png" alt="" class="circle responsive-img valign profile-image-login">
+            <p class="center login-form-text">User Login</p>
+          </div>
+        </div>
+        <div class="row margin">
+          <div class="input-field col s12">
+          <i class="material-icons prefix">perm_identity</i>
+          <input id="icon_prefix" type="text" class="validate">
+          <label for="icon_prefix">User Name</label>
+        </div>
+        </div>
+        <div class="row margin">
+          <div class="input-field col s12">
+          <i class="material-icons prefix">lock_outline</i>
+          <input id="Password" type="password" class="validate">
+          <label for="Password">Password</label>
+        </div>
+        </div>
+          <div class="row" id="districtDropDown">
+<!--              <div class="input-field col s12" >
+                  <select>
+                      <option value="" disabled selected>Choose your option</option>
+                      <option value="1">Option 1</option>
+                      <option value="2">Option 2</option>
+                      <option value="3">Option 3</option>
+                  </select>
+                  <label>Select District</label>
+              </div>-->
+          </div>  
+        <div class="row">          
+          <div class="input-field col s12 m12 l12  login-text">
+              <input type="checkbox" id="remember-me" />
+              <label for="remember-me">Remember me</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <a onclick="loginValidation()" class="btn waves-effect waves-light col s12">Login</a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s6 m6 l6">
+            <p class="margin medium-small"><a href="page-register.html">Register Now!</a></p>
+          </div>
+          <div class="input-field col s6 m6 l6">
+              <p class="margin right-align medium-small"><a href="page-forgot-password.html">Forgot password ?</a></p>
+          </div>          
+        </div>
+
+      </form>
+    </div>
+  </div>
+        
+         <script>var myContextPath = "${pageContext.request.contextPath}"</script>
+        <script type="text/javascript" src="resource/JS/jquery.min.js"></script>
+        <script type="text/javascript" src="resource/JS/jquery-ui.js"></script>
+        <script type="text/javascript" src="resource/JS/materialize.min.js"></script>
+        <script type="text/javascript" src="resource/JS/datatables.min.js"></script>
+        <script type="text/javascript" src="resource/JS/custom.js"></script>
+        <script type="text/javascript" src="resource/materialise/scrollbar.js"></script>
+        <script type="text/javascript" src="resource/materialise/prism.js"></script>
+        <script type="text/javascript" src="resource/materialise/plugin.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                distirctDropdown()
+            })
+        </script>
+    </body>
+</html>
