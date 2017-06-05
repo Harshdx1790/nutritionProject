@@ -1,22 +1,25 @@
-var contextPath = "http://localhost:8084/nutritionProject"
+var contextPath = ""
  var filterArr = {};
+contextPath =   window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
 function loginValidation(){
  var user = $("#icon_prefix").val();
  var password = $("#Password").val();
  var District = $("#districtSelectBox").val();
+
+
  $.ajax({
                     type: "POST",
                     url:  contextPath+"/AdminSubmit.do?parameter=getLoginValidation",
                         data: "user=" + encodeURIComponent(user)+ "&password=" +encodeURIComponent(password)+ "&District=" +encodeURIComponent(District),
                     success: function (response) { 
                         var data = "no";
-                        
+                       
                         
                         if(response.length<5){
                             alert("User Credentials not Matched!")
                         }
                         else{
-                    window.location.href = "/nutritionProject/landingPage.html";
+                    window.location.href = "/nutrition/landingPage.html";
                         }
                     }})
 }
@@ -44,6 +47,7 @@ function getWelcomeData(){
  var user = $("#icon_prefix").val();
  var password = $("#Password").val();
  var District = $("#districtSelectBox").val();
+ alert(contextPath)
  $.ajax({
                     type: "POST",
                     url:  contextPath+"/AdminSubmit.do?parameter=getWelcomeData",
@@ -292,7 +296,7 @@ function logout(){
                     type: "POST",
                     url:  contextPath+"/AdminSubmit.do?parameter=logout",
                     success: function (response) { 
-                     window.location.href = "/nutritionProject/";    
+                     window.location.href = contextPath;    
     }})
     
 }

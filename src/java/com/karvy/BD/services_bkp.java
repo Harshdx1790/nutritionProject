@@ -9,7 +9,6 @@ package com.karvy.BD;
  *
  * @author harshvardhan.solanki
  */
-import com.karvy.connectionPool.connectionPool;
 import com.karvy.container.container;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -35,24 +34,20 @@ import java.util.TreeMap;
 import static javafx.scene.input.KeyCode.T;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-public class services {
+public class services_bkp {
   
-    connectionPool connPool= null;
-    Connection conn = null;
+  
    
   public List getLoginValidation(LinkedHashMap<String,String>parameter,HttpServletRequest request,String queryFlag)throws ClassNotFoundException, SQLException, FileNotFoundException, IOException{
       
      
      queryProcessing processing = new queryProcessing();
      String query = processing.getQueries(queryFlag);
-     try{
-     if(connPool== null){
-     connPool = connectionPool.getInstance();
-     connPool.initialize();
-     }
-     conn = connPool.getConnection();
+     HashMap<String,String> Connection = processing.getConnectionDetails();
+     Class.forName(Connection.get("driver"));
+     Connection con = DriverManager.getConnection(Connection.get("connection")+"/"+Connection.get("dataBase"),Connection.get("userName"),Connection.get("password"));
      List<Map<String,String>> data = new ArrayList<Map<String,String>>();
-     PreparedStatement ps = conn.prepareStatement(query);
+     PreparedStatement ps = con.prepareStatement(query);
      Iterator it = parameter.entrySet().iterator();
      int count =1;
      while (it.hasNext()) {
@@ -80,30 +75,18 @@ public class services {
     session.setAttribute("container", container);
     rs.close();
     ps.close();
-    conn.close();
-     } 
-     catch(Exception ex){
-    ex.printStackTrace();
-    }
-    finally {
-            connPool.putConnection(conn);
-        }
-   return null;
+    con.close();
+    return null;
   }
   
   public List getBlockData(String user,String district,String queryFlag) throws ClassNotFoundException, SQLException{
   queryProcessing processing = new queryProcessing();
   String query = processing.getQueries(queryFlag);
   HashMap<String,String> Connection = processing.getConnectionDetails();
+  Class.forName(Connection.get("driver"));
+  Connection con = DriverManager.getConnection(Connection.get("connection")+"/"+Connection.get("dataBase"),Connection.get("userName"),Connection.get("password"));
   List<Map<String,String>> data = new ArrayList<Map<String,String>>();
-  try {
-  if(connPool== null){
-     connPool = connectionPool.getInstance();
-     connPool.initialize();
-     }
-     conn = connPool.getConnection();
-     
-  PreparedStatement ps = conn.prepareStatement(query);
+  PreparedStatement ps = con.prepareStatement(query);
   ps.setString(1, district);
   ResultSet rs = ps.executeQuery();
   ResultSetMetaData rsmd = rs.getMetaData();
@@ -117,28 +100,17 @@ public class services {
             row.put(col, rs.getString(col));
          }
     data.add(row);
-    }
-  } 
-     catch(Exception ex){
-    ex.printStackTrace();
-    }
-    finally {
-            connPool.putConnection(conn);
-        }
+    }      
   return data; 
   }
-  
   public List getProjectLevelData(LinkedHashMap<String,String> filter,String queryFlag) throws ClassNotFoundException, SQLException{
   queryProcessing processing = new queryProcessing();
   String query = processing.getQueries(queryFlag);
+  HashMap<String,String> Connection = processing.getConnectionDetails();
+  Class.forName(Connection.get("driver"));
+  Connection con = DriverManager.getConnection(Connection.get("connection")+"/"+Connection.get("dataBase"),Connection.get("userName"),Connection.get("password"));
   List<Map<String,String>> data = new ArrayList<Map<String,String>>();
-  try{
-      if(connPool== null){
-     connPool = connectionPool.getInstance();
-     connPool.initialize();
-     }
-     conn = connPool.getConnection();
-     PreparedStatement ps = conn.prepareStatement(query);
+  PreparedStatement ps = con.prepareStatement(query);
   Iterator it = filter.entrySet().iterator();
      int count =1;
      while (it.hasNext()) {
@@ -159,28 +131,17 @@ public class services {
             row.put(col, rs.getString(col));
          }
     data.add(row);
-    }  
-  }
-   catch(Exception ex){
-    ex.printStackTrace();
-    }
-    finally {
-            connPool.putConnection(conn);
-        }
+    }      
   return data; 
   }
   
  public List setInsertLevelData(LinkedHashMap<String,String> neutritionInsertData,String tableName) throws ClassNotFoundException, SQLException {
     queryProcessing processing = new queryProcessing();
-    List<Map<String,String>> data = new ArrayList<Map<String,String>>();
     HashMap<String,String> Connection = processing.getConnectionDetails();
-    try{
-    if(connPool== null){
-     connPool = connectionPool.getInstance();
-     connPool.initialize();
-     }
-     conn = connPool.getConnection();
-     StringBuilder sb = new StringBuilder();
+    Class.forName(Connection.get("driver"));
+    Connection con = DriverManager.getConnection(Connection.get("connection")+"/"+Connection.get("dataBase"),Connection.get("userName"),Connection.get("password"));
+    List<Map<String,String>> data = new ArrayList<Map<String,String>>();
+    StringBuilder sb = new StringBuilder();
     sb.append("insert into ");
     sb.append(tableName);
     sb.append(" values (");
@@ -200,17 +161,32 @@ public class services {
     }
     }
     sb.append(")");
-    PreparedStatement ps = conn.prepareStatement(sb.toString());
+    PreparedStatement ps = con.prepareStatement(sb.toString());
     ps.executeUpdate();
     ps.close();
-    conn.close();
-    }
-     catch(Exception ex){
-    ex.printStackTrace();
-    }
-    finally {
-            connPool.putConnection(conn);
-        }
+    con.close();
+//    StringBuilder sb1 = new StringBuilder();
+//    sb1.append("insert into nutrition_village_data values (");
+//    Iterator it1 = neutritionInsertData.entrySet().iterator();
+//    while(it1.hasNext()){
+//    Map.Entry pair1 = (Map.Entry)it1.next();
+//    if(pair1.getKey().toString().equalsIgnoreCase("district") || pair1.getKey().toString().equalsIgnoreCase("block")|| pair1.getKey().toString().equalsIgnoreCase("Village") || pair1.getKey().toString().equalsIgnoreCase("villageAssemblyName") || pair1.getKey().toString().equalsIgnoreCase("villageHeadName")||pair1.getKey().toString().equalsIgnoreCase("villageHeadMobile") || pair1.getKey().toString().equalsIgnoreCase("awwName") || pair1.getKey().toString().equalsIgnoreCase("awwMobile")|| pair1.getKey().toString().equalsIgnoreCase("ServantName") || pair1.getKey().toString().equalsIgnoreCase("Servantmobile") || pair1.getKey().toString().equalsIgnoreCase("datePicker")||pair1.getKey().toString().equalsIgnoreCase("Place")|| pair1.getKey().toString().equalsIgnoreCase("subcenter")){
+//    sb1.append("'");
+//    sb1.append(pair1.getValue().toString());
+//    sb1.append("'");
+//    sb1.append(",");
+//    }else if(pair1.getKey().toString().equalsIgnoreCase("datePicker")){
+//    sb1.append("'");
+//    sb1.append(pair1.getValue().toString());
+//    sb1.append("'");
+//    sb1.append(" ");
+//    }
+//    }
+//    sb1.append(")");
+//    PreparedStatement ps1 = con.prepareStatement(sb1.toString());
+//    ps1.executeUpdate();
+    
+    
   return data; 
     
  } 

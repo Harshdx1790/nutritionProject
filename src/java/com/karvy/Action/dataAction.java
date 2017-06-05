@@ -14,28 +14,49 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import javax.servlet.http.HttpSession;
-import org.apache.struts.actions.DispatchAction;
-import com.karvy.BD.services;
 import com.karvy.DAO.servicesDAO;
 import com.karvy.container.container;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
+import org.apache.struts.actions.LookupDispatchAction;
 
 /**
  *
  * @author harshvardhan.solanki
  */
-public class dataAction extends DispatchAction {
+public class dataAction extends LookupDispatchAction {
+    private ResourceBundle getResourceBundle() {
+        ResourceBundle resourceBundle = null;
 
-    public ActionForward getLoginValidation(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        response.setHeader("cache-control", "no-cache");
+        return resourceBundle;
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    protected Map getKeyMethodMap() {
+        Map map = new HashMap();
+        map.put("getLoginValidation", "getLoginValidation");
+        map.put("getWelcomeData", "getWelcomeData");
+        map.put("getBlockData", "getBlockData");
+        map.put("getProjectLevelData", "getProjectLevelData");
+        map.put("setInsertLevelData", "setInsertLevelData");
+        map.put("logout", "logout");
+        return map;
+    }
+    public ActionForward getLoginValidation(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws java.lang.Exception {
+//        response.setHeader("cache-control", "no-cache");
         HttpSession httpSession = request.getSession();
         String user = "";
         String Password = "";
         String District = "";
+        System.out.println("...............................................hello.......................................................................");
         if (request.getParameter("user") != null) {
             user = request.getParameter("user");
         }
@@ -48,9 +69,14 @@ public class dataAction extends DispatchAction {
         servicesDAO dAO = new servicesDAO();
         String data = dAO.getLoginValidation(user, Password, District,request);
         
-        PrintWriter out = response.getWriter();
-        out.println(data);
-        out.flush();
+        PrintWriter out = null;
+        try{
+        response.getWriter().print(data);
+        } catch(IOException ex){
+            System.out.println("Not return");
+        }
+//        out.println(data);
+//        out.flush();
         return null;
     }
    
@@ -66,11 +92,13 @@ public class dataAction extends DispatchAction {
     Type tokenType = new TypeToken<Map<String,String>>(){
     }.getType();
     data = gson.toJson(map,tokenType);
-    PrintWriter out = response.getWriter();
-        out.println(data);
-        out.flush();
-        return null;
-    
+    PrintWriter out = null;
+        try{
+        response.getWriter().print(data);
+        } catch(IOException ex){
+            System.out.println("Not return");
+        }
+    return null;
     }
     
    public ActionForward getBlockData(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception { 
@@ -90,10 +118,13 @@ public class dataAction extends DispatchAction {
    servicesDAO dAO = new servicesDAO();
    String data = dAO.getBlockData(user,district,queryFlag);
     
-    PrintWriter out = response.getWriter();
-        out.println(data);
-        out.flush();
-        return null;
+   PrintWriter out = null;
+        try{
+        response.getWriter().print(data);
+        } catch(IOException ex){
+            System.out.println("Not return");
+        }
+    return null;    
    }
    public ActionForward getProjectLevelData(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception { 
    HttpSession httpSession = request.getSession(false);
@@ -114,9 +145,12 @@ public class dataAction extends DispatchAction {
    servicesDAO dAO = new servicesDAO();
    String data = dAO.getProjectLevelData(filterData,queryFlag);
     
-    PrintWriter out = response.getWriter();
-        out.println(data);
-        out.flush();
+    PrintWriter out = null;
+        try{
+        response.getWriter().print(data);
+        } catch(IOException ex){
+            System.out.println("Not return");
+        }
         return null;
    }
 
@@ -138,9 +172,12 @@ public class dataAction extends DispatchAction {
    servicesDAO dAO = new servicesDAO();
    dAO.setInsertLevelData(neutritionInsertData,tableFlag);
    
-   PrintWriter out = response.getWriter();
-        out.println(data);
-        out.flush();
+   PrintWriter out = null;
+        try{
+        response.getWriter().print(data);
+        } catch(IOException ex){
+            System.out.println("Not return");
+        }
         return null;    
    }
    
@@ -151,9 +188,12 @@ public class dataAction extends DispatchAction {
     session.invalidate();
         }
        String data = "";
-     PrintWriter out = response.getWriter();
-        out.println(data);
-        out.flush();
+     PrintWriter out = null;
+        try{
+        response.getWriter().print(data);
+        } catch(IOException ex){
+            System.out.println("Not return");
+        }
         return null;    
 }
 }

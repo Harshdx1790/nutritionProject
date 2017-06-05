@@ -7,7 +7,7 @@
 
 <struts-config>
     <form-beans>
-    
+            <form-bean name="dataForm" type="com.karvy.Action.dataForm"/>
     </form-beans>
     
     <global-exceptions>
@@ -15,19 +15,20 @@
     </global-exceptions>
 
     <global-forwards>
-        <forward name="welcome"  path="/Welcome.do"/>
+<!--        <forward name="welcome"  path="/Welcome.do"/>-->
+            <forward name="AdminSubmit" path="/AdminSubmit.do?parameter=getLoginValidation"/>
     </global-forwards>
 
     <action-mappings>
-        <action path="/Welcome" forward="/welcomeStruts.jsp"/>
-        <action path="/AdminSubmit" type="com.karvy.Action.dataAction" parameter="parameter" input="/cxoDashboard.jsp" name="dataForm" scope="request" validate="false">
-                <forward name="add" path="/adminUser.jsp" />
+        <!--<action path="/Welcome" forward="/welcomeStruts.jsp"/>-->
+        <action path="/AdminSubmit" type="com.karvy.Action.dataAction" parameter="parameter">
+                <!--<forward name="add" path="/adminUser.jsp" />-->
       </action>
     </action-mappings>
     
-    <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
+    <!--<controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>-->
 
-    <message-resources parameter="com/myapp/struts/ApplicationResource"/>    
+    <message-resources parameter="com/karvy/resourceBundle/nutrtionResBundle"/>    
     
     <!-- ========================= Tiles plugin ===============================-->
     <!--
