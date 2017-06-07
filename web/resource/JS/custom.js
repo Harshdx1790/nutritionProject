@@ -1,6 +1,7 @@
 var contextPath = ""
  var filterArr = {};
 contextPath =   window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
+var globalData;
 function loginValidation(){
  var user = $("#icon_prefix").val();
  var password = $("#Password").val();
@@ -31,12 +32,12 @@ function distirctDropdown(){
         var htmlvar = "";
         htmlvar+=' <div class="input-field col s12" >';
         htmlvar+="<select id='districtSelectBox'>";
-        htmlvar+='<option value="" disabled selected>Choose your option</option>';
+        htmlvar+='<option value="" disabled selected>Choose </option>';
         for(var i in district){
         htmlvar+='<option value="'+district[i]["District"]+'">'+district[i]["District"]+'</option>';
         }
         htmlvar+="</select>";
-        htmlvar+="<label>Select District</label>";
+        htmlvar+="<label style='font-size: medium;'>Select District</label>";
         htmlvar+="</div>";
         $("#districtDropDown").html(htmlvar);
         $('select').material_select();
@@ -47,7 +48,6 @@ function getWelcomeData(){
  var user = $("#icon_prefix").val();
  var password = $("#Password").val();
  var District = $("#districtSelectBox").val();
- alert(contextPath)
  $.ajax({
                     type: "POST",
                     url:  contextPath+"/AdminSubmit.do?parameter=getWelcomeData",
@@ -106,7 +106,7 @@ function getprojectData(){
 
 function projectLevelData(data){
     var htmlvar = "";
-      htmlvar+='<option value="" disabled selected>Choose your option</option>';
+      htmlvar+='<option value="" disabled selected>?????</option>';
     for(var i in data){
      htmlvar+='<option value="'+data[i]["FType"]+'">'+data[i]["FType"]+'</option>';   
     }
@@ -121,7 +121,7 @@ function disableProjectInfo(){
         var htmlvar = "";
         htmlvar +='<i class="material-icons prefix" >work</i>';
         htmlvar +='<input disabled type="text" value="'+project_name+'" id="project_name" >';
-        htmlvar +='<label for="project_name"></label>';
+        htmlvar +='<label for="project_name" style="font-size: medium;"></label>';
         
         $("#project_name_Div").html(htmlvar)
         
@@ -129,7 +129,7 @@ function disableProjectInfo(){
          var htmlvar = "";
         htmlvar +='<i class="material-icons prefix" >work</i>';
         htmlvar +='<input disabled type="text"  id="project_name" >';
-        htmlvar +='<label for="project_name">Project Name</label>';
+        htmlvar +='<label for="project_name" style="font-size: medium;">Project Name</label>';
         $("#project_name_Div").html(htmlvar)
      $('#project_name').removeAttr('disabled');
     }
@@ -154,7 +154,7 @@ function getPHCData(){
 }
 function phcLevelData(data){ 
     var htmlvar = "";
-      htmlvar+='<option value="" disabled selected>Choose your option</option>';
+      htmlvar+='<option value="" disabled selected>?????</option>';
     for(var i in data){
      htmlvar+='<option value="'+data[i]["PHCName"]+'">'+data[i]["PHCName"]+'</option>';   
     }
@@ -177,7 +177,7 @@ function getSubCentreData(){
 }
 function subCentreData(data){ 
     var htmlvar = "";
-      htmlvar+='<option value="" disabled selected>Choose your option</option>';
+      htmlvar+='<option value="" disabled selected>?????</option>';
     for(var i in data){
      htmlvar+='<option value="'+data[i]["SubCenter"]+'">'+data[i]["SubCenter"]+'</option>';   
     }
@@ -200,7 +200,8 @@ function getVillageData(){
 }
 function villageLveleData(data){ 
     var htmlvar = "";
-      htmlvar+='<option value="" disabled selected>Choose your option</option>';
+    globalData = data;
+      htmlvar+='<option value="" disabled selected>?????</option>';
     for(var i in data){
      htmlvar+='<option value="'+data[i]["Village"]+'">'+data[i]["Village"]+'</option>';   
     }
@@ -275,7 +276,7 @@ function insertData(){
     insertDataMap1["datePicker"] = datePicker;
     var tableFlag = "nutrition_data" ;
     var tableFlag1 = "nutrition_village_data" ;
-    alert(JSON.stringify(insertDataMap1)+":::::"+ServantName+":::::"+Servantmobile)
+    
     $.ajax({
                     type: "POST",
                     url:  contextPath+"/AdminSubmit.do?parameter=setInsertLevelData",
@@ -288,6 +289,110 @@ function insertData(){
                     success: function (response) { 
                         alert(response)
     }})
+    }})
+}
+function insertVillageData(){
+    var district = $("#selectDistrictBox").val();
+    var block = $("#selectBlock").val();
+    var subcenter = $("#selectSubcenter").val();
+    var project_name = $("#project_name").val();
+    var ProjectType = $("#selectProjectType").val();
+    var PHCName = $("#selectPHCName").val();
+    var mOfficerName = $("#Medical-characters-demo").val();
+    var mOfficerMobile = $("#phone-Medical").val();
+    var cOfficerName = $("#Child-characters-demo").val();
+    var cOfficerMobile = $("#phone-Child").val();
+    var ANMName = $("#characters-demo").val();
+    var ANMMobile = $("#phone-ANM").val();
+    var Village = $("#selectVillage").val();
+    var villageAssemblyName = $("#villageAssemblyName").val();
+    var villageHeadName = $("#villageHeadName").val();
+    var villageHeadMobile = $("#village_Head_Mobile").val();
+    var awwName = $("#awwName").val();
+    var awwMobile = $("#awwMobile").val();
+    var ashaName = $("#ashaName").val();
+    var ashaMobile = $("#ashaMobile").val();
+    var ServantName = $("#Servant_Name").val();
+    var Servantmobile = $("#Servant_mobile").val();
+    var datePicker = $("#datePicker").val();
+    var Place = $("#Place").val();
+    var insertDataMap = {};
+    var insertDataMap1 = {};
+    var insertDataArr = [];
+    insertDataMap["district"] = district;
+    insertDataMap["block"] = block;
+    insertDataMap["subcenter"] = subcenter;
+    insertDataMap["project_name"] = project_name;
+    insertDataMap["ProjectType"] = ProjectType;
+    insertDataMap["PHCName"] = PHCName;
+    insertDataMap["mOfficerName"] = mOfficerName;
+    insertDataMap["mOfficerMobile"] = mOfficerMobile;
+    insertDataMap["cOfficerName"] = cOfficerName;
+    insertDataMap["cOfficerMobile"] = cOfficerMobile;
+    insertDataMap["ANMName"] = ANMName;
+    insertDataMap["ANMMobile"] = ANMMobile;
+    insertDataMap["datePicker"] = datePicker;
+    
+    insertDataMap1["district"] = district;
+    insertDataMap1["block"] = block;
+    insertDataMap1["Village"] = Village;
+    insertDataMap1["villageAssemblyName"] = villageAssemblyName;
+    insertDataMap1["villageHeadName"] = villageHeadName;
+    insertDataMap1["villageHeadMobile"] = villageHeadMobile;
+    insertDataMap1["awwName"] = awwName;
+    insertDataMap1["awwMobile"] = awwMobile;
+    insertDataMap1["ashaName"] = awwName;
+    insertDataMap1["ashaMobile"] = ashaMobile;
+    insertDataMap1["ServantName"] = ServantName;
+    insertDataMap1["Servantmobile"] = Servantmobile;
+    insertDataMap1["datePicker1"] = datePicker;
+    insertDataMap1["Place"] = Place;
+    insertDataMap1["subcenter"] = subcenter;
+    insertDataMap1["datePicker"] = datePicker;
+    var tableFlag1 = "nutrition_village_data" ;
+    $("#villageAssemblyName").val("");
+    $("#villageHeadName").val("");
+    $("#village_Head_Mobile").val("");
+    $("#awwName").val("");
+    $("#awwMobile").val("");
+    $("#ashaName").val("");
+    $("#ashaMobile").val("");
+    $("#Servant_Name").val("");
+    $("#Servant_mobile").val("");
+    $("#Place").val("");
+    $("#selectVillage").html("");
+    $("#datePicker").html("")
+    
+    var htmlvar = "";
+   
+      htmlvar+='<option value="" disabled selected>?????</option>';
+    for(var i in globalData){
+     htmlvar+='<option value="'+globalData[i]["Village"]+'">'+globalData[i]["Village"]+'</option>';   
+    }
+    $("#selectVillage").html(htmlvar);
+    $('#selectVillage').removeAttr('disabled');
+    htmlvar = "";
+    htmlvar+='<option value=""  selected>?????</option>';
+    htmlvar+='<option value="प�?रथम ब�?धवार ">प�?रथम ब�?धवार </option>'
+    htmlvar+='<option value="प�?रथम शनिवार ">प�?रथम शनिवार </option>'
+    htmlvar+='<option value="द�?वितीय ब�?धवार ">द�?वितीय  ब�?धवार </option>'
+    htmlvar+='<option value="द�?वितीयशनिवार ">द�?वितीय  शनिवार </option>'
+    htmlvar+='<option value="तृतीय ब�?धवार ">तृतीय ब�?धवार </option>'
+    htmlvar+='<option value="तृतीय शनिवार ">तृतीय शनिवार </option>'
+    htmlvar+='<option value="चत�?र�?थ ब�?धवार ">चत�?र�?थ  ब�?धवार </option>'
+    htmlvar+=' <option value="चत�?र�?थ शनिवार ">चत�?र�?थ  शनिवार </option>'
+    htmlvar+=' <option value="अन�?य">अन�?य</option>'
+    $("#datePicker").html(htmlvar)
+    $('select').material_select();
+    
+    
+                    $.ajax({
+                    type: "POST",
+                    url:  contextPath+"/AdminSubmit.do?parameter=setInsertLevelData",
+                    data:  "insertData=" +encodeURIComponent(JSON.stringify(insertDataMap1))+ "&tableFlag=" +encodeURIComponent(tableFlag1),
+                    success: function (response) { 
+                        
+    			alert("Village Data Saved Successfully!")
     }})
 }
 
