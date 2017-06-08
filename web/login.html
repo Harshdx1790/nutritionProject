@@ -24,6 +24,7 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="resource/materialise/style.min.css"/>
     </head>
     <body class="cyan ">
+        
         <div id="loader-wrapper">
       <div id="loader"></div>        
       <div class="loader-section section-left"></div>
@@ -77,18 +78,51 @@ and open the template in the editor.
             <a onclick="loginValidation()" class="btn waves-effect waves-light col s12">Login</a>
           </div>
         </div>
-<!--        <div class="row">
-          <div class="input-field col s6 m6 l6">
+        <div class="row">
+<!--          <div class="input-field col s6 m6 l6">
             <p class="margin medium-small"><a href="page-register.html">Register Now!</a></p>
-          </div>
-          <div class="input-field col s6 m6 l6">
-              <p class="margin right-align medium-small"><a href="page-forgot-password.html">Forgot password ?</a></p>
+          </div>-->
+          <div class="input-field col s12 ">
+              <!--<button data-target="modal1" class="btn modal-trigger">Modal</button>-->
+              <p class="margin right-align medium-small"><a data-target="modal1" class=" modal-trigger" >Change password </a></p>
           </div>          
-        </div>-->
+        </div>
 
       </form>
     </div>
   </div>
+        <div id="modal1" class="modal" style="width: 30%">
+            <div class="modal-content">
+                <div class="row">
+                    <h4 class="center">Change Password</h4> 
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="user_name" type="text" class="validate">
+                        <label for="user_name">User name</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="Old_Pwd" type="password" class="validate">
+                        <label for="Old_Pwd">Old Password</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="New_Pwd" type="password" class="validate">
+                        <label for="New_Pwd">New Password</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="Confirm_Pwd" type="text" class="validate" onkeyup="confirmPassword()" >
+                        <label for="Confirm_Pwd">Confirm Password</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <label id="notConfirmLabel" style="color:red;display: none"> Both Password Not Matched!</label>
+                        <label id="ConfirmLabel" style="color:green;display: none"> Password Matched</label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" onclick="modelclose()">Save</a>
+            </div>
+        </div>
         
          <script>var myContextPath = "${pageContext.request.contextPath}"</script>
         <script type="text/javascript" src="resource/JS/jquery.min.js"></script>
@@ -101,8 +135,15 @@ and open the template in the editor.
         <script type="text/javascript" src="resource/materialise/plugin.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){
+                 $('.modal-trigger').leanModal({
+                     dismissible: false
+                 });
                 distirctDropdown()
             })
+            function modelclose(){
+            $('.lean-overlay').remove();
+            changePassword();
+            } 
         </script>
     </body>
 </html>

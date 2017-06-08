@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Nutrition Project</title>
+        <title>VHND Micro Plan</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -46,7 +46,7 @@ and open the template in the editor.
                 <div class="nav-wrapper">                    
                     
                     <ul class="left">                      
-                      <li><h1 class="logo-wrapper"><a href="index.html" class="brand-logo darken-1">State Nutrition Mission</a> </h1></li>
+                      <li><h1 class="logo-wrapper"><a href="index.html" class="brand-logo darken-1">VHND Micro Plan</a> </h1></li>
                       <!--<li><h1 class="logo-wrapper"><a href="index.html" class="brand-logo darken-1"><img src="images/materialize-logo.png" alt="materialize logo"></a> <span class="logo-text">Materialize</span></h1></li>-->
                     </ul>
 <!--                    <div class="header-search-wrapper hide-on-med-and-down">
@@ -92,27 +92,27 @@ and open the template in the editor.
                         <option value="2">Option 2</option>
                         <option value="3">Option 3</option>
                     </select>
-                    <label style="font-size: medium;">जिला</label>
+                    <label  style="color:#32CD32;font-size: medium;">जिला</label>
                 </div>
                 <div class="input-field col s6">
                     <select disabled id="selectBlock" onchange="getprojectData()">
                         <option value="" disabled selected>चुनाव</option>
                         
                     </select>
-                    <label style="font-size: medium;">विकास खण्ड / ब्लॉक </label>
+                    <label class="greenC" style="color:#32CD32;font-size: medium;">विकास खण्ड / ब्लॉक </label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s6">
                     <p>
                         <input disabled type="checkbox" id="test6" onchange="disableProjectInfo()"  />
-                        <label for="test6" style="font-size: medium;">(अगर परियोजना का नाम वही है जो ब्लॉक का नाम है तो बॉक्स को चेक कर दें।) </label>
+                        <label class="greenC" for="test6" style="color:#32CD32;font-size: medium;">(अगर परियोजना का नाम वही है जो ब्लॉक का नाम है तो बॉक्स को चेक कर दें।) </label>
                     </p>
                 </div>
                 <div class="input-field col s6" id="project_name_Div" >
                     <i class="material-icons prefix" >work</i>
                     <input disabled type="text" id="project_name" >
-                    <label for="project_name" style="font-size: medium;">परियोजना का नाम</label>
+                    <label class="greenC" for="project_name" style="color:#32CD32;font-size: medium;">परियोजना का नाम</label>
                 </div>
                 
             </div>
@@ -120,10 +120,10 @@ and open the template in the editor.
             <div class="row">
                 <div class="input-field col s6">
                     <select class="projectName" disabled id="selectProject" onchange="getPHCData()">
-                      <option value="" disabled selected>चुनाव</option>  
+                      <option class="greenC" value="" disabled selected>चुनाव</option>  
                         
                     </select>
-                    <label style="font-size: medium;">परियोजना प्रकार</label>
+                    <label class="greenC" style="color:#32CD32;font-size: medium;">परियोजना प्रकार</label>
                 </div>
                 <div class="input-field col s6">
                     <select disabled id="selectProjectType" >
@@ -132,7 +132,7 @@ and open the template in the editor.
                         <option value="Urban">Urban</option>
                         
                     </select>
-                    <label style="font-size: medium;">ग्रामीण / शहरी </label>
+                    <label class="greenC" style="color:#32CD32;font-size: medium;">ग्रामीण / शहरी </label>
                 </div>
             </div>
             <div class="row">
@@ -143,7 +143,7 @@ and open the template in the editor.
                         <option value="2">Option 2</option>
                         <option value="3">Option 3</option>-->
                     </select>
-                    <label style="font-size: medium;">चिकित्सा इकाई का नाम </label>
+                    <label class="greenC" style="color:#32CD32;font-size: medium;">चिकित्सा इकाई का नाम </label>
                 </div>
                 <div class="input-field col s6">
                     <select disabled id="selectSubcenter" onchange="getVillageData()">
@@ -152,9 +152,9 @@ and open the template in the editor.
                         <option value="2">Option 2</option>
                         <option value="3">Option 3</option>-->
                     </select>
-                    <label style="font-size: medium;">उपकेन्द्र का नाम</label>
+                    <label class="greenC" style="color:#32CD32;font-size: medium;">उपकेन्द्र का नाम</label>
                 </div>
-                
+               
             </div>
             </div>
             <div class="card-panel">
@@ -162,36 +162,36 @@ and open the template in the editor.
                  <div class="input-field col s6">
                     <i class="material-icons prefix" >account_circle</i>
                     <input placeholder="Max 50 Character" id="Medical-characters-demo" type="text" class="">
-                    <label for="characters" style="font-size: medium;">अधीक्षक /प्रभारी चिकित्साधिकारी का नाम</label>
+                    <label class="greenC" for="characters" style="color:#32CD32;font-size: medium;">अधीक्षक /प्रभारी चिकित्साधिकारी का नाम</label>
                 </div>
                 <div class="input-field col s6">
                      <i class="material-icons prefix" >phone</i>
                      <input id="phone-Medical" type="text" class="">
-                     <label for="phone_Medical" style="font-size: medium;">अधीक्षक /प्रभारी चिकित्साधिकारी का मोबाइल न.</label>
+                     <label class="greenC" for="phone_Medical" style="color:#32CD32;font-size: medium;">अधीक्षक /प्रभारी चिकित्साधिकारी का मोबाइल न.</label>
                 </div>
             </div>
             <div class="row">
                  <div class="input-field col s6">
                     <i class="material-icons prefix" >account_circle</i>
                     <input placeholder="Max 50 Character" id="Child-characters-demo" type="text" class="">
-                    <label for="characters" style="font-size: medium;">बाल विकास परियोजना अधिकारी का नाम</label>
+                    <label class="greenC" for="characters" style="color:#32CD32;font-size: medium;">बाल विकास परियोजना अधिकारी का नाम</label>
                 </div>
                 <div class="input-field col s6">
                     <i class="material-icons prefix" >phone</i>
                      <input id="phone-Child" type="text" class="">
-                     <label for="phone_Child" style="font-size: medium;">बाल विकास परियोजना अधिकारी का मोबाइल</label>
+                     <label class="greenC" for="phone_Child" style="color:#32CD32;font-size: medium;">बाल विकास परियोजना अधिकारी का मोबाइल</label>
                 </div>
             </div>
             <div class="row">
                  <div class="input-field col s6">
                     <i class="material-icons prefix" >account_circle</i>
                     <input placeholder="Max 50 Character" id="characters-demo" type="text" class="">
-                    <label for="characters" style="font-size: medium;">ए एन एम का नाम</label>
+                    <label class="greenC" for="characters" style="color:#32CD32;font-size: medium;">ए एन एम का नाम</label>
                 </div>
                 <div class="input-field col s6">
                     <i class="material-icons prefix " >phone</i>
                      <input id="phone-ANM" type="text" class="">
-                     <label for="phone_ANM" style="font-size: medium;">ए एन एम का मोबाइल न.</label>
+                     <label class="greenC" for="phone_ANM" style="color:#32CD32;font-size: medium;">ए एन एम का मोबाइल न.</label>
                 </div>
             </div>
             </div>
@@ -202,65 +202,65 @@ and open the template in the editor.
                         <option value="" disabled selected>चुनाव</option>
 
                     </select>
-                    <label style="font-size: medium;">गांव का नाम</label>
+                    <label class="greenC" style="color:#32CD32;font-size: medium;">गांव का नाम</label>
                 </div>
                 <div class="input-field col s6">
                     <i class="material-icons prefix" >account_circle</i>
                     <input placeholder="Max 50 Character" id="villageAssemblyName" type="text" class="">
-                    <label for="villageAssemblyName" style="font-size: medium;">ग्राम सभा (पंचायत ) का नाम</label>
+                    <label class="greenC" for="villageAssemblyName" style="color:#32CD32;font-size: medium;">ग्राम सभा (पंचायत ) का नाम</label>
                 </div>
             </div>
             <div class="row">
                  <div class="input-field col s6">
                     <i class="material-icons prefix" >account_circle</i>
                     <input placeholder="Max 50 Character" id="villageHeadName" type="text" class="">
-                    <label for="villageHeadName" style="font-size: medium;">ग्राम प्रधान का नाम</label>
+                    <label class="greenC" for="villageHeadName" style="color:#32CD32;font-size: medium;">ग्राम प्रधान का नाम</label>
                 </div>
                 <div class="input-field col s6">
                      <i class="material-icons prefix" >phone</i>
                      <input id="village_Head_Mobile" type="text" class="">
-                     <label for="village_Head_Mobile" style="font-size: medium;">ग्राम प्रधान का मोबाइल न</label>
+                     <label class="greenC" for="village_Head_Mobile" style="color:#32CD32;font-size: medium;">ग्राम प्रधान का मोबाइल न</label>
                 </div>
             </div>
             <div class="row">
                  <div class="input-field col s6">
                     <i class="material-icons prefix" >account_circle</i>
                     <input placeholder="Max 50 Character" id="awwName" type="text" class="">
-                    <label for="awwName" style="font-size: medium;">आंगनवाड़ी कार्यकत्री का नाम</label>
+                    <label class="greenC" for="awwName" style="color:#32CD32;font-size: medium;">आंगनवाड़ी कार्यकत्री का नाम</label>
                 </div>
                 <div class="input-field col s6">
                     <i class="material-icons prefix" >phone</i>
                      <input id="awwMobile" type="text" class="">
-                     <label for="awwMobile" style="font-size: medium;">आंगनवाड़ी कार्यकत्री का मोबाइल न</label>
+                     <label class="greenC" for="awwMobile" style="color:#32CD32;font-size: medium;">आंगनवाड़ी कार्यकत्री का मोबाइल न</label>
                 </div>
             </div>
             <div class="row">
                  <div class="input-field col s6">
                     <i class="material-icons prefix" >account_circle</i>
                     <input placeholder="Max 50 Character" id="ashaName" type="text" class="">
-                    <label for="ashaName" style="font-size: medium;">आशा का नाम</label>
+                    <label class="greenC" for="ashaName" style="color:#32CD32;font-size: medium;">आशा का नाम</label>
                 </div>
                 <div class="input-field col s6">
                     <i class="material-icons prefix " >phone</i>
                      <input id="ashaMobile" type="text" class="">
-                     <label for="ashaMobile" style="font-size: medium;">आशा का मोबाइल न</label>
+                     <label class="greenC" for="ashaMobile" style="color:#32CD32;font-size: medium;">आशा का मोबाइल न</label>
                 </div>
             </div>
             <div class="row">
                  <div class="input-field col s6">
                     <i class="material-icons prefix" >account_circle</i>
                     <input placeholder="Max 50 Character" id="Servant_Name" type="text" class="">
-                    <label for="Servant_Name" style="font-size: medium;">मुख्य सेविका का नाम</label>
+                    <label class="greenC" for="Servant_Name" style="color:#32CD32;font-size: medium;">मुख्य सेविका का नाम</label>
                 </div>
                 <div class="input-field col s6">
                     <i class="material-icons prefix " >phone</i>
                      <input id="Servant_mobile" type="text" class="">
-                     <label for="Servant_mobile" style="font-size: medium;">मुख्य सेविका का मोबाइल न.</label>
+                     <label class="greenC" for="Servant_mobile" style="color:#32CD32;font-size: medium;">मुख्य सेविका का मोबाइल न.</label>
                 </div>
             </div>
             <div class="row">
                  <div class="input-field col s6">
-                     <select id="datePicker" onchange="getSubCentreData()">
+                     <select id="datePicker" >
                         <option value=""  selected>चुनाव</option>
                         <option value="प्रथम बुधवार ">प्रथम बुधवार </option>
                         <option value="प्रथम शनिवार ">प्रथम शनिवार </option>
@@ -272,7 +272,7 @@ and open the template in the editor.
                         <option value="चतुर्थ शनिवार ">चतुर्थ  शनिवार </option>
                         <option value="अन्य">अन्य</option>
                     </select>
-                    <label style="font-size: medium;">वी० एच ० एन ० डी ० का दिन </label>
+                    <label class="greenC" style="color:#32CD32;font-size: medium;">वी० एच ० एन ० डी ० का दिन </label>
 <!--                     <i class="fa fa-calendar prefix" aria-hidden="true"></i>
                     <label class="active" for="datePicker" id="datePickerLabel">वी० एच ० एन ० डी ० का दिन</label>
                      <input type="date" id="datePicker" class="datepicker" >-->
@@ -280,19 +280,52 @@ and open the template in the editor.
                 <div class="input-field col s6">
                     <i class="fa fa-map-marker prefix" aria-hidden="true"></i>
                      <input id="Place" type="text" class="">
-                     <label for="Place" style="font-size: medium;">वी० एच ० एन ० डी ० का स्थान</label>
+                     <label class="greenC" for="Place" style="color:#32CD32;font-size: medium;">वी० एच ० एन ० डी ० का स्थान</label>
                 </div>
             </div>
             </div>
             <div class="row center" >
-                <button class="btn waves-effect waves-light karvySkyBlueBackGround center cyan" style="border-radius: 25px;"  onclick="insertVillageData()" name="action" >Save
+                <button class="btn waves-effect waves-light karvySkyBlueBackGround center cyan" id="saveButton" style="border-radius: 25px;"  onclick="insertVillageData()" name="action" >Save
                     <i class="material-icons right">send</i>
                 </button>
-                <button class="btn waves-effect waves-light karvySkyBlueBackGround center cyan" style="border-radius: 25px;"  onclick="insertData()" name="action" >Submit
+                <button class="btn waves-effect waves-light karvySkyBlueBackGround disabled center cyan" id="submitButton" style="border-radius: 25px;"  onclick="insertData()" name="action" >Submit
                     <i class="material-icons right">send</i>
                 </button>
             </div>
         </div>
+        <div id="modal2" class="modal" style="width: 30%">
+            <div class="modal-content">
+                <div class="row">
+                    <h4 class="center">Village Entry Details</h4> 
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="entriesText" type="text" class="validate">
+                        <label for="entriesText">how many Revenue villages data you have to punch</label>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" onclick="modelclose()">Save</a>
+            </div>
+        </div>
+        <div id="modal3" class="modal" style="width: 90%">
+            <div class="modal-content">
+                <div class="row">
+                    <h4 class="center">Village Entry Details</h4> 
+                </div>
+                <div class="row" id="entryTable">
+                   
+                    
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn" onclick="modelclose()">Ok</a>
+            </div>
+        </div>
+         <p class="margin right-align medium-small" style="display: none"><a id="dialogEntry" data-target="modal2" class=" modal-trigger" > </a></p>
+         <p class="margin right-align medium-small" style="display: none"><a id="dialogEntry2" data-target="modal3" class=" modal-trigger" > </a></p>
          <footer class="page-footer">
           
           <div class="footer-copyright">
@@ -320,8 +353,14 @@ and open the template in the editor.
             $(document).ready(function() {
                 getWelcomeData();
                 $('select').material_select();
+                 $('.modal-trigger').leanModal({
+                     dismissible: false
+                 });
             });
-            
+            function modelclose(){
+                $('.lean-overlay').remove();
+                villageEntriesDetails();
+            }
 //                $('.datepicker').pickadate({
 ////                    selectMonths: true, // Creates a dropdown to control month
 ////                    selectYears: 15 // Creates a dropdown of 15 years to control year
@@ -355,16 +394,7 @@ and open the template in the editor.
             'pattern': '+91 {{999}}-{{999}}-{{9999}}',
             'persistent': true
             });
-//            $('#characters-demo').formatter({
-//          'pattern': '{{aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa}}',
-//            });
-//            $('#Child-characters-demo').formatter({
-//          'pattern': '{{aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa}}',
-//            });
-//            $('#Medical-characters-demo').formatter({
-//          'pattern': '{{aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa}}',
-//            });
-            
+
         </script>    
     </body>
     

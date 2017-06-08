@@ -47,7 +47,7 @@ public static synchronized connectionPool getInstance(){
         }
 
 public synchronized void initialize(){
-if(connections==null){
+//if(connections==null){
 try{
         Properties properties = new Properties();
         InputStream IStream = getClass().getResourceAsStream("/com/karvy/properties/dbProperties.properties");
@@ -59,16 +59,17 @@ try{
         Class.forName(properties.getProperty("driver")).newInstance();
         connections = new ArrayList<Connection>();
         int count=0;
-        while(count<maxConnection){
+//        while(count<maxConnection){
         Connection conn = DriverManager.getConnection(DBUrl,DBUsrename,DBPassword);
         connections.add(conn);
         count++;
-        }System.out.println("connected");
+//        }
+        System.out.println("connected");
 }
 catch(Exception e){
 System.out.println("cannot connect to database server");
 }
-}
+//}
 }
 public synchronized Connection getConnection(){
         Connection conn = null;

@@ -42,17 +42,19 @@ public class services {
    
   public List getLoginValidation(LinkedHashMap<String,String>parameter,HttpServletRequest request,String queryFlag)throws ClassNotFoundException, SQLException, FileNotFoundException, IOException{
       
-     
+     List<Map<String,String>> data = new ArrayList<Map<String,String>>();
      queryProcessing processing = new queryProcessing();
      String query = processing.getQueries(queryFlag);
+     ResultSet rs = null;
+     PreparedStatement ps = null;
      try{
      if(connPool== null){
      connPool = connectionPool.getInstance();
      connPool.initialize();
      }
      conn = connPool.getConnection();
-     List<Map<String,String>> data = new ArrayList<Map<String,String>>();
-     PreparedStatement ps = conn.prepareStatement(query);
+     
+      ps = conn.prepareStatement(query);
      Iterator it = parameter.entrySet().iterator();
      int count =1;
      while (it.hasNext()) {
@@ -61,7 +63,7 @@ public class services {
          count++;
          it.remove();
      }
-     ResultSet rs = ps.executeQuery();
+      rs = ps.executeQuery();
      ResultSetMetaData rsmd = rs.getMetaData();
      List<String> columns = new ArrayList<String>(rsmd.getColumnCount());
         for(int i = 1; i <= rsmd.getColumnCount(); i++){
@@ -78,17 +80,18 @@ public class services {
     container.setResultSetData(data);
     HttpSession session = request.getSession(false);
     session.setAttribute("container", container);
-    rs.close();
-    ps.close();
-    conn.close();
+    
      } 
      catch(Exception ex){
     ex.printStackTrace();
     }
     finally {
+            rs.close();
+            ps.close();
+            conn.close();
             connPool.putConnection(conn);
         }
-   return null;
+   return data;
   }
   
   public List getBlockData(String user,String district,String queryFlag) throws ClassNotFoundException, SQLException{
@@ -96,6 +99,8 @@ public class services {
   String query = processing.getQueries(queryFlag);
   HashMap<String,String> Connection = processing.getConnectionDetails();
   List<Map<String,String>> data = new ArrayList<Map<String,String>>();
+  ResultSet rs = null;
+  PreparedStatement ps = null;
   try {
   if(connPool== null){
      connPool = connectionPool.getInstance();
@@ -103,9 +108,9 @@ public class services {
      }
      conn = connPool.getConnection();
      
-  PreparedStatement ps = conn.prepareStatement(query);
+   ps = conn.prepareStatement(query);
   ps.setString(1, district);
-  ResultSet rs = ps.executeQuery();
+   rs = ps.executeQuery();
   ResultSetMetaData rsmd = rs.getMetaData();
   List<String> columns = new ArrayList<String>(rsmd.getColumnCount());
         for(int i = 1; i <= rsmd.getColumnCount(); i++){
@@ -118,11 +123,15 @@ public class services {
          }
     data.add(row);
     }
+    
   } 
      catch(Exception ex){
     ex.printStackTrace();
     }
     finally {
+            rs.close();
+            ps.close();
+            conn.close();
             connPool.putConnection(conn);
         }
   return data; 
@@ -132,13 +141,15 @@ public class services {
   queryProcessing processing = new queryProcessing();
   String query = processing.getQueries(queryFlag);
   List<Map<String,String>> data = new ArrayList<Map<String,String>>();
+  ResultSet rs = null;
+  PreparedStatement ps = null;
   try{
       if(connPool== null){
      connPool = connectionPool.getInstance();
      connPool.initialize();
      }
      conn = connPool.getConnection();
-     PreparedStatement ps = conn.prepareStatement(query);
+     ps = conn.prepareStatement(query);
   Iterator it = filter.entrySet().iterator();
      int count =1;
      while (it.hasNext()) {
@@ -147,7 +158,7 @@ public class services {
          count++;
          it.remove();
      }
-  ResultSet rs = ps.executeQuery();
+    rs = ps.executeQuery();
   ResultSetMetaData rsmd = rs.getMetaData();
   List<String> columns = new ArrayList<String>(rsmd.getColumnCount());
         for(int i = 1; i <= rsmd.getColumnCount(); i++){
@@ -160,6 +171,9 @@ public class services {
          }
     data.add(row);
     }  
+    rs.close();
+    ps.close();
+    conn.close();
   }
    catch(Exception ex){
     ex.printStackTrace();
@@ -174,6 +188,7 @@ public class services {
     queryProcessing processing = new queryProcessing();
     List<Map<String,String>> data = new ArrayList<Map<String,String>>();
     HashMap<String,String> Connection = processing.getConnectionDetails();
+    PreparedStatement ps = null;
     try{
     if(connPool== null){
      connPool = connectionPool.getInstance();
@@ -200,19 +215,54 @@ public class services {
     }
     }
     sb.append(")");
-    PreparedStatement ps = conn.prepareStatement(sb.toString());
+    ps = conn.prepareStatement(sb.toString());
     ps.executeUpdate();
-    ps.close();
-    conn.close();
+    
     }
      catch(Exception ex){
     ex.printStackTrace();
     }
     finally {
+            ps.close();
+            conn.close();
             connPool.putConnection(conn);
         }
   return data; 
     
  } 
-  
+ public String changePassword(String userID,String password,String newPassword ,String tableFlag) throws ClassNotFoundException, SQLException {
+    queryProcessing processing = new queryProcessing();
+    String data = "";
+    HashMap<String,String> Connection = processing.getConnectionDetails();
+    String query = processing.getQueries(tableFlag);
+    PreparedStatement ps = null;
+    try{
+      if(connPool== null){
+     connPool = connectionPool.getInstance();
+     connPool.initialize();
+     }
+     conn = connPool.getConnection();
+     ps = conn.prepareStatement(query);
+     ps.setString(1, newPassword);
+     ps.setString(2, userID);
+     ps.setString(3, password);
+//    Iterator it = filter.entrySet().iterator();
+     int rows = ps.executeUpdate();
+        if(rows>0){
+        data = "Password changed!";
+        }
+        else{
+        data = "Password not changed, Please enter valid details";
+        }
+  }
+   catch(Exception ex){
+    ex.printStackTrace();
+    }
+    finally {
+            ps.close();
+            conn.close();
+            connPool.putConnection(conn);
+        }
+ return data; 
+ } 
 }

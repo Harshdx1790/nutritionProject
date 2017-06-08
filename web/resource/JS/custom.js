@@ -2,6 +2,10 @@ var contextPath = ""
  var filterArr = {};
 contextPath =   window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
 var globalData;
+ var entriesFlag = 0;
+
+ var villageGlobalMap = {};
+ var entriesFlagCount = 1;
 function loginValidation(){
  var user = $("#icon_prefix").val();
  var password = $("#Password").val();
@@ -37,7 +41,7 @@ function distirctDropdown(){
         htmlvar+='<option value="'+district[i]["District"]+'">'+district[i]["District"]+'</option>';
         }
         htmlvar+="</select>";
-        htmlvar+="<label style='font-size: medium;'>Select District</label>";
+        htmlvar+="<label class='greenC' style='color:#32CD32;font-size: medium;'>Select District</label>";
         htmlvar+="</div>";
         $("#districtDropDown").html(htmlvar);
         $('select').material_select();
@@ -121,7 +125,7 @@ function disableProjectInfo(){
         var htmlvar = "";
         htmlvar +='<i class="material-icons prefix" >work</i>';
         htmlvar +='<input disabled type="text" value="'+project_name+'" id="project_name" >';
-        htmlvar +='<label for="project_name" style="font-size: medium;"></label>';
+        htmlvar +='<label class="greenC" for="project_name" style="color:#32CD32;font-size: medium;"></label>';
         
         $("#project_name_Div").html(htmlvar)
         
@@ -129,7 +133,7 @@ function disableProjectInfo(){
          var htmlvar = "";
         htmlvar +='<i class="material-icons prefix" >work</i>';
         htmlvar +='<input disabled type="text"  id="project_name" >';
-        htmlvar +='<label for="project_name" style="font-size: medium;">Project Name</label>';
+        htmlvar +='<label class="greenC" for="project_name" style="color:#32CD32;font-size: medium;">Project Name</label>';
         $("#project_name_Div").html(htmlvar)
      $('#project_name').removeAttr('disabled');
     }
@@ -186,6 +190,7 @@ function subCentreData(data){
     $('select').material_select();
 }
 function getVillageData(){
+     $( "#dialogEntry" ).trigger( "click" );
      var SubCenter = $("#selectSubcenter").val();
    filterArr["SubCenter"] = SubCenter;
    var queryFlag = "villageLevelData"
@@ -276,19 +281,56 @@ function insertData(){
     insertDataMap1["datePicker"] = datePicker;
     var tableFlag = "nutrition_data" ;
     var tableFlag1 = "nutrition_village_data" ;
+//    alert(JSON.stringify(Object.keys(villageGlobalMap["1"][0])))
+    var keys = Object.keys(villageGlobalMap["1"][0]);
     
+    var htmlvar = "";
+        htmlvar+="<table class='bordered striped highlight centered responsive-table'>";
+        htmlvar+="<thead>";
+        htmlvar+="<tr style='background-color: royalblue;color: white;'>"
+        htmlvar+="<th style='border: 1px solid #e7e7e7;'>जिला</th>"
+        htmlvar+="<th style='border: 1px solid #e7e7e7;'>विकास खण्ड / ब्लॉक</th>"
+        htmlvar+="<th style='border: 1px solid #e7e7e7;'>गांव का नाम</th>"
+        htmlvar+="<th style='border: 1px solid #e7e7e7;'>ग्राम सभा (पंचायत ) का नाम</th>"
+        htmlvar+="<th style='border: 1px solid #e7e7e7;'>ग्राम प्रधान का नाम</th>"
+        htmlvar+="<th style='border: 1px solid #e7e7e7;'>ग्राम प्रधान का मोबाइल न</th>"
+        htmlvar+="<th style='border: 1px solid #e7e7e7;'>आंगनवाड़ी कार्यकत्री का नाम</th>"
+        htmlvar+="<th style='border: 1px solid #e7e7e7;'>आंगनवाड़ी कार्यकत्री का मोबाइल न</th>"
+        htmlvar+="<th style='border: 1px solid #e7e7e7;'>आशा का नाम</th>"
+        htmlvar+="<th style='border: 1px solid #e7e7e7;'>आशा का मोबाइल न</th>"
+        htmlvar+="<th style='border: 1px solid #e7e7e7;'>मुख्य सेविका का नाम</th>"
+        htmlvar+="<th style='border: 1px solid #e7e7e7;'>मुख्य सेविका का मोबाइल न.</th>"
+        htmlvar+="<th style='border: 1px solid #e7e7e7;'>वी० एच ० एन ० डी ० का दिन</th>"
+        htmlvar+="<th style='border: 1px solid #e7e7e7;'>वी० एच ० एन ० डी ० का स्थान</th>"
+        
+        htmlvar+="</tr>"
+        htmlvar+="</thead>"
+    for(var v in villageGlobalMap){
+       
+       
+        htmlvar+="<tr>";
+            for(var t in keys){
+                if(keys[t]!="subcenter" && keys[t]!="datePicker" )
+        htmlvar+="<td style='border: 1px solid #e7e7e7;'>"+villageGlobalMap[v][0][keys[t]]+"</td>";
+            }
+        htmlvar+="</tr>";
+    }
+        htmlvar+="</table>";
+    
+    $("#entryTable").html(htmlvar)
+    $( "#dialogEntry2" ).trigger( "click" );
     $.ajax({
                     type: "POST",
                     url:  contextPath+"/AdminSubmit.do?parameter=setInsertLevelData",
                     data:  "insertData=" +encodeURIComponent(JSON.stringify(insertDataMap))+"&tableFlag=" +encodeURIComponent(tableFlag),
                     success: function (response) { 
-                        $.ajax({
-                    type: "POST",
-                    url:  contextPath+"/AdminSubmit.do?parameter=setInsertLevelData",
-                    data:  "insertData=" +encodeURIComponent(JSON.stringify(insertDataMap1))+ "&tableFlag=" +encodeURIComponent(tableFlag1),
-                    success: function (response) { 
-                        alert(response)
-    }})
+//                        $.ajax({
+//                    type: "POST",
+//                    url:  contextPath+"/AdminSubmit.do?parameter=setInsertLevelData",
+//                    data:  "insertData=" +encodeURIComponent(JSON.stringify(insertDataMap1))+ "&tableFlag=" +encodeURIComponent(tableFlag1),
+//                    success: function (response) { 
+//                        alert(response)
+//    }})
     }})
 }
 function insertVillageData(){
@@ -362,10 +404,8 @@ function insertVillageData(){
     $("#Place").val("");
     $("#selectVillage").html("");
     $("#datePicker").html("")
-    
     var htmlvar = "";
-   
-      htmlvar+='<option value="" disabled selected>?????</option>';
+    htmlvar+='<option value="" disabled selected>?????</option>';
     for(var i in globalData){
      htmlvar+='<option value="'+globalData[i]["Village"]+'">'+globalData[i]["Village"]+'</option>';   
     }
@@ -373,27 +413,37 @@ function insertVillageData(){
     $('#selectVillage').removeAttr('disabled');
     htmlvar = "";
     htmlvar+='<option value=""  selected>?????</option>';
-    htmlvar+='<option value="प�?रथम ब�?धवार ">प�?रथम ब�?धवार </option>'
-    htmlvar+='<option value="प�?रथम शनिवार ">प�?रथम शनिवार </option>'
-    htmlvar+='<option value="द�?वितीय ब�?धवार ">द�?वितीय  ब�?धवार </option>'
-    htmlvar+='<option value="द�?वितीयशनिवार ">द�?वितीय  शनिवार </option>'
-    htmlvar+='<option value="तृतीय ब�?धवार ">तृतीय ब�?धवार </option>'
+    htmlvar+='<option value=""  selected>चुनाव</option>'
+    htmlvar+='<option value="प्रथम बुधवार ">प्रथम बुधवार </option>'
+    htmlvar+='<option value="द्वितीय बुधवार ">द्वितीय  बुधवार </option>'
+    htmlvar+='<option value="द्वितीयशनिवार ">द्वितीय  शनिवार </option>'
+    htmlvar+='<option value="तृतीय बुधवार">तृतीय बुधवार </option>'
     htmlvar+='<option value="तृतीय शनिवार ">तृतीय शनिवार </option>'
-    htmlvar+='<option value="चत�?र�?थ ब�?धवार ">चत�?र�?थ  ब�?धवार </option>'
-    htmlvar+=' <option value="चत�?र�?थ शनिवार ">चत�?र�?थ  शनिवार </option>'
-    htmlvar+=' <option value="अन�?य">अन�?य</option>'
+    htmlvar+='<option value="चतुर्थ बुधवार">चतुर्थ बुधवार </option>'
+    htmlvar+=' <option value="चतुर्थ शनिवार ">चतुर्थ शनिवार </option>'
+    htmlvar+=' <option value="अन्य">अन्य</option>'
     $("#datePicker").html(htmlvar)
     $('select').material_select();
-    
-    
-                    $.ajax({
+     var villageGlobalArr=[];
+    if(!(entriesFlagCount>entriesFlag)){
+        villageGlobalArr.push(insertDataMap1)
+       villageGlobalMap[entriesFlagCount] = villageGlobalArr;
+                 $.ajax({
                     type: "POST",
                     url:  contextPath+"/AdminSubmit.do?parameter=setInsertLevelData",
                     data:  "insertData=" +encodeURIComponent(JSON.stringify(insertDataMap1))+ "&tableFlag=" +encodeURIComponent(tableFlag1),
                     success: function (response) { 
-                        
-    			alert("Village Data Saved Successfully!")
+                        alert(entriesFlagCount +" Village Data Saved Successfully!")
+                        entriesFlagCount++;
     }})
+    }else{
+        alert(entriesFlag +" entries already saved!")
+        $("#submitButton").removeClass("disabled")
+        $("#saveButton").prop('disabled', true).addClass('disabled').off( "click" );
+    }
+    
+    
+          
 }
 
 function logout(){
@@ -403,5 +453,43 @@ function logout(){
                     success: function (response) { 
                      window.location.href = contextPath;    
     }})
+    
+}
+
+function changePassword(){
+   var user =  $("#user_name").val();
+   var Old_Pwd =  $("#Old_Pwd").val();
+   var New_Pwd =  $("#New_Pwd").val();
+   var Confirm_Pwd =  $("#Confirm_Pwd").val();
+   var tableFlag = "changePassword";
+   if(New_Pwd==Confirm_Pwd){
+       $.ajax({
+                    type: "POST",
+                    url:  contextPath+"/AdminSubmit.do?parameter=changePassword",
+                    data:  "userID=" +encodeURIComponent(user)+ "&password=" +encodeURIComponent(Old_Pwd)+ "&newPassword=" +encodeURIComponent(New_Pwd)+ "&tableFlag=" +encodeURIComponent(tableFlag),
+                    success: function (response) { 
+                            alert(response)
+        }})
+   }else{
+       alert("please enter valid password");
+   }
+}
+
+function confirmPassword(){
+    var newPD = $("#New_Pwd").val();
+    var confirmPD = $("#Confirm_Pwd").val();
+    if(newPD!=confirmPD){
+        $("#notConfirmLabel").css("display","block");
+        $("#ConfirmLabel").css("display","none");
+    }else{
+        $("#notConfirmLabel").css("display","none"); 
+        $("#ConfirmLabel").css("display","block");
+        
+    }
+    
+}
+
+function villageEntriesDetails(){
+    entriesFlag = $("#entriesText").val();
     
 }

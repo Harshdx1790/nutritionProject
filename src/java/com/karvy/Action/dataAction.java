@@ -48,6 +48,7 @@ public class dataAction extends LookupDispatchAction {
         map.put("getProjectLevelData", "getProjectLevelData");
         map.put("setInsertLevelData", "setInsertLevelData");
         map.put("logout", "logout");
+        map.put("changePassword", "changePassword");
         return map;
     }
     public ActionForward getLoginValidation(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws java.lang.Exception {
@@ -189,6 +190,35 @@ public class dataAction extends LookupDispatchAction {
         }
        String data = "";
      PrintWriter out = null;
+        try{
+        response.getWriter().print(data);
+        } catch(IOException ex){
+            System.out.println("Not return");
+        }
+        return null;    
+}
+   public ActionForward changePassword(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
+       
+       HttpSession session = request.getSession(false);
+       String userID = "";
+       String password = "";
+       String newPassword = "";
+       String tableFlag = "";
+        if (request.getParameter("userID") != null) {
+           userID = request.getParameter("userID");
+       }
+        if (request.getParameter("password") != null) {
+           password = request.getParameter("password");
+       }
+        if (request.getParameter("newPassword") != null) {
+           newPassword = request.getParameter("newPassword");
+       }
+        if (request.getParameter("tableFlag") != null) {
+           tableFlag = request.getParameter("tableFlag");
+       }
+        servicesDAO dAO = new servicesDAO();
+        String data = dAO.changePassword(userID, password, newPassword, tableFlag);
+        PrintWriter out = null;
         try{
         response.getWriter().print(data);
         } catch(IOException ex){

@@ -52,6 +52,7 @@ public class servicesDAO {
 
 public String getLoginValidation(String user, String Password, String District,HttpServletRequest request) throws ClassNotFoundException, SQLException, IOException {
         List<Map<String, String>> data = new ArrayList<>();
+        List<Map<String, String>> data1 = new ArrayList<>();
         Gson gson = new Gson();
         services service = new services();
         LinkedHashMap<String, String> Parameter = new LinkedHashMap<>();
@@ -59,10 +60,16 @@ public String getLoginValidation(String user, String Password, String District,H
         Parameter.put("Password", Password);
         Parameter.put("District", District);
         String query = "loginValidation";
-        service.getLoginValidation(Parameter,request,query);
+        data1 = service.getLoginValidation(Parameter,request,query);
         HttpSession session = request.getSession(false);
-        container container = (container) session.getAttribute("container");
+        container container = null;
+        if(session!=null){
+        container = (container) session.getAttribute("container");
         data = container.getResultSetData();
+        }else{
+        data = data1;
+        container.setResultSetData(data);
+        }
         for(int i=0;i<data.size();i++){
             Iterator iterator = data.get(i).entrySet().iterator();
             while(iterator.hasNext()){
@@ -107,5 +114,11 @@ public String setInsertLevelData(LinkedHashMap<String,String> neutritionInsertDa
         List<Map<String,String>> data = service.setInsertLevelData(neutritionInsertData,tableFlag);
 
         return null;
+}
+public String changePassword(String userID,String password,String newPassword ,String tableFlag) throws ClassNotFoundException, SQLException{
+        services service = new services();
+        Gson gson = new Gson();
+        String data = service.changePassword(userID, password, newPassword, tableFlag);
+        return data;
 }
 }
